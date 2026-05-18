@@ -1,16 +1,43 @@
-if SHIELD_ZARUBALL_RIGHT #ここを変えてセントラル側に問題のコードを移行
+# ==========================================
+# 右手（Right）の設定：こちらを「親機（Central）」にする
+# ==========================================
+if SHIELD_ZARUBALL_RIGHT
 
-# Name must be less than 16 characters long!
 config ZMK_KEYBOARD_NAME
     default "ZaruBall"
 
-config ZMK_SPLIT_ROLE_CENTRAL
+# 右手を親機にする設定（最新のZMKの書き方）
+config ZMK_SPLIT_BLE_ROLE_CENTRAL
+    default y
+
+# マウス機能をONにする
+config ZMK_POINTING
+    default y
+
+# SPIではなくI2Cを使うように変更！
+config I2C
     default y
 
 endif
 
+
+# ==========================================
+# 左手（Left）の設定：こちらは「子機（Peripheral）」になる
+# ==========================================
+if SHIELD_ZARUBALL_LEFT
+
+config ZMK_KEYBOARD_NAME
+    default "ZaruBall"
+
+endif
+
+
+# ==========================================
+# 左右共通の設定
+# ==========================================
 if SHIELD_ZARUBALL_LEFT || SHIELD_ZARUBALL_RIGHT
 
+# 分割キーボードであることを宣言
 config ZMK_SPLIT
     default y
 
